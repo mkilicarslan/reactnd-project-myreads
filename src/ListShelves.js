@@ -10,9 +10,15 @@ class ListShelves extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf />
-            <Bookshelf />
-            <Bookshelf />
+            <Bookshelf
+              title="Currently Reading"
+            />
+            <Bookshelf
+              title="Want to Read"
+            />
+            <Bookshelf
+              title="Read"
+            />
           </div>
         </div>
         <div className="open-search">
