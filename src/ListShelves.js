@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom'
 import Bookshelf from './Bookshelf'
 
 class ListShelves extends Component {
+
+  state = {
+    currentlyList: [],
+    wantToList: [],
+    readList: [],
+  }
+
   render() {
     return (
       <div className="list-books">
@@ -13,12 +20,15 @@ class ListShelves extends Component {
           <div>
             <Bookshelf
               title="Currently Reading"
+              bookList={this.state.currentlyList}
             />
             <Bookshelf
               title="Want to Read"
+              bookList={this.state.wantToList}
             />
             <Bookshelf
               title="Read"
+              bookList={this.state.readList}
             />
           </div>
         </div>
