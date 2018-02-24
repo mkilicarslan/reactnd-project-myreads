@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BookshelfChanger from './BookshelfChanger'
 
 class Book extends Component {
   render() {
