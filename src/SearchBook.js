@@ -46,9 +46,7 @@ class SearchBook extends Component {
               {this.state.books.map(book => (
                   <li key={book.id}>
                     <Book
-                      title={book.title}
-                      authors={book.authors}
-                      imageLink={book.imageLinks.smallThumbnail}
+                      book={book}
                     />
                   </li>
                 ))}
