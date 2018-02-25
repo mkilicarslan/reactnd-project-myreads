@@ -20,12 +20,10 @@ class SearchBook extends Component {
     BooksAPI.search(this.state.query)
     .then((books) => {
       this.setState({ books })
-      console.log(books)
     })
   }
 
   render() {
-
     return (
         <div className="search-books">
           <div className="search-books-bar">
