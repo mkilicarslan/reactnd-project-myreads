@@ -16,7 +16,7 @@ class SearchBook extends Component {
     })
 
     if(query) {
-      BooksAPI.search(this.state.query)
+      BooksAPI.search(query)
       .then((books) => {
         if (books.length > 0) {
           this.setState({ books })
@@ -26,6 +26,7 @@ class SearchBook extends Component {
   }
 
   render() {
+    const { query, books } = this.state
     return (
         <div className="search-books">
           <div className="search-books-bar">
@@ -38,14 +39,14 @@ class SearchBook extends Component {
               <input
                 type="text"
                 placeholder="Search by title or author"
-                value={this.state.query}
+                value={query}
                 onChange={(event) => this.updateQuery(event.target.value)}
               />
             </div>
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              {this.state.query && this.state.books.map(book => (
+              {query && books.map(book => (
                   <li key={book.id}>
                     <Book
                       book={book}
