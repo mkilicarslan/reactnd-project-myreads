@@ -16,6 +16,17 @@ class ListShelves extends Component {
     })
   }
 
+  changeShelf = (book, newShelf) => {
+    BooksAPI.update(book, newShelf)
+    .then(()=>{
+      const updatedBooks = this.state.books.filter(
+        item => item.id !== book.id
+      )
+      book.shelf = newShelf // ??
+      updatedBooks.push(book)
+      this.setState({ books: updatedBooks })
+    })
+  }
 
   render() {
     const { books } = this.state
@@ -31,18 +42,21 @@ class ListShelves extends Component {
               bookList={books.filter(
                 book => book.shelf === "currentlyReading"
               )}
+              changeShelf={this.changeShelf}
             />
             <Bookshelf
               title="Want to Read"
               bookList={books.filter(
                 book => book.shelf === "wantToRead"
               )}
+              changeShelf={this.changeShelf}
             />
             <Bookshelf
               title="Read"
               bookList={books.filter(
                 book => book.shelf === "read"
               )}
+              changeShelf={this.changeShelf}
             />
           </div>
         </div>

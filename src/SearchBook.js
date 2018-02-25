@@ -7,7 +7,7 @@ class SearchBook extends Component {
 
   state = {
     query: "",
-    books: []
+    books: [],
   }
 
   updateQuery = (query) => {
@@ -24,6 +24,17 @@ class SearchBook extends Component {
       })
     }
   }
+
+  changeShelf = (book, newShelf) => {
+    BooksAPI.update(book, newShelf)
+    .then(()=>{
+      const updatedBooks = this.state.books.filter(
+        item => item.id !== book.id
+      )
+      this.setState({ books: updatedBooks })
+    })
+  }
+
 
   render() {
     const { query, books } = this.state
@@ -50,6 +61,7 @@ class SearchBook extends Component {
                   <li key={book.id}>
                     <Book
                       book={book}
+                      changeShelf={this.changeShelf}
                     />
                   </li>
               ))}
