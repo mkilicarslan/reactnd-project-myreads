@@ -22,7 +22,6 @@ class ListShelves extends Component {
       const updatedBooks = this.state.books.filter(
         item => item.id !== book.id
       )
-      book.shelf = newShelf // ??
       updatedBooks.push(book)
       this.setState({ books: updatedBooks })
     })
