@@ -34,7 +34,7 @@ class BooksApp extends Component {
 
   updateQuery = (query) => {
     this.setState({
-      query: query.trim()
+      query: query.replace(/ +/g, ' ')
     })
 
     if(query) {
