@@ -1,39 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book'
-import * as BooksAPI from './BooksAPI'
 
 class SearchBook extends Component {
-
-  state = {
-    query: "",
-    books: [],
-    noSearchResult: false
-  }
-
-  updateQuery = (query) => {
-    this.setState({
-      query: query.trim()
-    })
-
-    if(query) {
-      BooksAPI.search(query)
-      .then((books) => {
-        this.setState({ noSearchResult: true })
-        if (books.length > 0) {
-          this.setState({ books, noSearchResult: false })
-        }
-      })
-    }
-  }
-
-  changeShelf = (book, newShelf) => {
-    BooksAPI.update(book, newShelf)
-  }
-
-
   render() {
-    const { query, books, noSearchResult } = this.state
+    const { query, books, updateQuery, noSearchResult, changeShelf } = this.props
     return (
         <div className="search-books">
           <div className="search-books-bar">
@@ -47,7 +18,7 @@ class SearchBook extends Component {
                 type="text"
                 placeholder="Search by title or author"
                 value={query}
-                onChange={(event) => this.updateQuery(event.target.value)}
+                onChange={(event) => updateQuery(event.target.value)}
               />
             </div>
           </div>
@@ -60,7 +31,7 @@ class SearchBook extends Component {
                   <li key={book.id}>
                     <Book
                       book={book}
-                      changeShelf={this.changeShelf}
+                      changeShelf={changeShelf}
                     />
                   </li>
               ))}
