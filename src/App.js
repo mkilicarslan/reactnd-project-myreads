@@ -7,7 +7,7 @@ import './App.css'
 
 class BooksApp extends Component {
   state = {
-    myBooks: [],
+    myReads: [],
     searchedBooks:[],
     query: "",
     noSearchResult: false
@@ -15,20 +15,20 @@ class BooksApp extends Component {
 
   componentDidMount() {
     BooksAPI.getAll()
-    .then((myBooks) => {
-      this.setState({ myBooks: myBooks })
+    .then((myReads) => {
+      this.setState({ myReads: myReads })
     })
   }
 
   changeShelf = (book, newShelf) => {
     BooksAPI.update(book, newShelf)
     .then(()=>{
-      const booksAfterChange = this.state.myBooks.filter(
+      const booksAfterChange = this.state.myReads.filter(
         item => item.id !== book.id
       )
       book.shelf = newShelf
       booksAfterChange.push(book)
-      this.setState({ myBooks: booksAfterChange })
+      this.setState({ myReads: booksAfterChange })
     })
   }
 
@@ -50,17 +50,18 @@ class BooksApp extends Component {
 
   render() {
     const { changeShelf, updateQuery } = this
-    const { myBooks, searchedBooks, query, noSearchResult } = this.state
+    const { myReads, searchedBooks, query, noSearchResult } = this.state
     return (
       <div className="app">
         <Route exact path="/" render={() => (
           <ListShelves
-          books={myBooks}
+          books={myReads}
           changeShelf={changeShelf}
           />
         )}/>
         <Route path="/search" render={() => (
           <SearchBook
+          myReads={myReads}
           books={searchedBooks}
           query={query}
           noSearchResult={noSearchResult}

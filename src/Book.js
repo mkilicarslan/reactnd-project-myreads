@@ -3,7 +3,7 @@ import BookshelfChanger from './BookshelfChanger'
 
 class Book extends Component {
   render() {
-    const { book, changeShelf } = this.props
+    const { myReads, book, changeShelf } = this.props
     const defaultImg = book.imageLinks ? book.imageLinks.smallThumbnail : ""
     const defaultAuthor = book.authors ? book.authors : "not found"
     return (
@@ -15,6 +15,7 @@ class Book extends Component {
             backgroundImage: `url(${defaultImg})` }}>
           </div>
           <BookshelfChanger
+            myReads={myReads}
             book={book}
             changeShelf={changeShelf}
           />

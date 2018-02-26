@@ -2,7 +2,15 @@ import React, { Component } from 'react'
 
 class BookshelfChanger extends Component {
   render() {
-    const { book, changeShelf } = this.props
+    const { myReads, book, changeShelf } = this.props
+
+    for (let myRead in myReads) {
+      if (myRead.id === book.id) {
+        book.shelf = myRead.shelf
+        break
+      }
+    }
+
     return (
       <div className="book-shelf-changer">
         <select

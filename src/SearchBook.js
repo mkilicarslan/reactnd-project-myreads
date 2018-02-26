@@ -4,7 +4,7 @@ import Book from './Book'
 
 class SearchBook extends Component {
   render() {
-    const { query, books, updateQuery, noSearchResult, changeShelf } = this.props
+    const { myReads, books, query, updateQuery, noSearchResult, changeShelf } = this.props
     return (
         <div className="search-books">
           <div className="search-books-bar">
@@ -30,6 +30,7 @@ class SearchBook extends Component {
               {!noSearchResult && query && books.map(book => (
                   <li key={book.id}>
                     <Book
+                      myReads={myReads}
                       book={book}
                       changeShelf={changeShelf}
                     />
