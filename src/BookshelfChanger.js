@@ -4,10 +4,12 @@ class BookshelfChanger extends Component {
   render() {
     const { myReads, book, changeShelf } = this.props
 
-    for (let myRead in myReads) {
-      if (myRead.id === book.id) {
-        book.shelf = myRead.shelf
-        break
+    if (!book.shelf) {
+      for (let myRead of myReads) {
+        if (myRead.id === book.id) {
+          book.shelf = myRead.shelf
+          break
+        }
       }
     }
 
