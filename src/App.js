@@ -13,6 +13,7 @@ class BooksApp extends Component {
     noSearchResult: false
   }
 
+  // Get all books currently in a bookshelf
   componentDidMount() {
     BooksAPI.getAll()
     .then((myReads) => {
@@ -20,6 +21,25 @@ class BooksApp extends Component {
     })
   }
 
+  // Update the query and escape multi-whitespaces
+  updateQuery = (query) => {
+    this.setState({
+      query: query.replace(/ +/g, ' ')
+    })
+
+    // If there is a query, search on database. Display a message on error.
+    if(query) {
+      BooksAPI.search(query)
+      .then((books) => {
+        books.length > 0 ?
+          this.setState({ searchedBooks: books, noSearchResult: false })
+          :
+          this.setState({ noSearchResult: true })
+      })
+    }
+  }
+
+  // Update the shelf and the ListShelves component
   changeShelf = (book, newShelf) => {
     BooksAPI.update(book, newShelf)
     .then(()=>{
@@ -32,22 +52,6 @@ class BooksApp extends Component {
     })
   }
 
-  updateQuery = (query) => {
-    this.setState({
-      query: query.replace(/ +/g, ' ')
-    })
-
-    if(query) {
-      BooksAPI.search(query)
-      .then((books) => {
-        books.length > 0 ?
-          this.setState({ searchedBooks: books, noSearchResult: false })
-          :
-          this.setState({ noSearchResult: true })
-      })
-    }
-  }
-
   render() {
     const { changeShelf, updateQuery } = this
     const { myReads, searchedBooks, query, noSearchResult } = this.state
@@ -55,18 +59,18 @@ class BooksApp extends Component {
       <div className="app">
         <Route exact path="/" render={() => (
           <ListShelves
-          books={myReads}
-          changeShelf={changeShelf}
+            books={myReads}
+            changeShelf={changeShelf}
           />
         )}/>
         <Route path="/search" render={() => (
           <SearchBook
-          myReads={myReads}
-          books={searchedBooks}
-          query={query}
-          noSearchResult={noSearchResult}
-          changeShelf={changeShelf}
-          updateQuery={updateQuery}
+            myReads={myReads}
+            books={searchedBooks}
+            query={query}
+            noSearchResult={noSearchResult}
+            changeShelf={changeShelf}
+            updateQuery={updateQuery}
           />
         )}/>
       </div>

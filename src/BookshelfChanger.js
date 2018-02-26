@@ -4,6 +4,7 @@ class BookshelfChanger extends Component {
   render() {
     const { myReads, book, changeShelf } = this.props
 
+    // In SearchBook component, add checkmark to book if it is belong to any shelf
     if (!book.shelf) {
       for (let myRead of myReads) {
         if (myRead.id === book.id) {

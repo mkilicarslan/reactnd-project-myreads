@@ -23,6 +23,7 @@ class SearchBook extends Component {
             </div>
           </div>
           <div className="search-books-results">
+            {/* Display a message if there is no result */}
             {noSearchResult && query.length !== 0 &&
               <div>There is no result. Please try again</div>
             }
