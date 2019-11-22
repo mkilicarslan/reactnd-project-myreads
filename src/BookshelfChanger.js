@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class BookshelfChanger extends Component {
   render() {
-    const { myReads, book, changeShelf } = this.props
+    const { myReads, book, changeShelf } = this.props;
 
     // In SearchBook component, add checkmark to book if it is belong to any shelf
     if (!book.shelf) {
       for (let myRead of myReads) {
         if (myRead.id === book.id) {
-          book.shelf = myRead.shelf
-          break
+          book.shelf = myRead.shelf;
+          break;
         }
       }
     }
@@ -18,7 +18,7 @@ class BookshelfChanger extends Component {
       <div className="book-shelf-changer">
         <select
           value={book.shelf || "none"}
-          onChange={(event) => changeShelf(book, event.target.value)}
+          onChange={event => changeShelf(book, event.target.value)}
         >
           <option disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
@@ -27,8 +27,8 @@ class BookshelfChanger extends Component {
           <option value="none">None</option>
         </select>
       </div>
-    )
+    );
   }
 }
 
-export default BookshelfChanger
+export default BookshelfChanger;
